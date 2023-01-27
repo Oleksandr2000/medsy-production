@@ -1,9 +1,6 @@
 export const useDarkTheme = () => {
-    if(typeof window === undefined){
-        return;
+    if(typeof window !== "undefined" && typeof document !== "undefined"){
+        return document.documentElement.classList.contains("dark");
     }
-
-    const isDark = document.documentElement.classList.contains("dark");
-
-    return isDark;
+    return false;
 }
