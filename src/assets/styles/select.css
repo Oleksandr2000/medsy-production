@@ -1,0 +1,28 @@
+.custom-select__control {
+  min-width: 170px !important;
+  @apply border rounded-md border-gray-400 px-2 dark:hover:border-dark bg-white dark:bg-dark dark:border-dark;
+}
+
+.custom-select__single-value {
+  @apply dark:text-gray-400;
+}
+
+.custom-select__indicator-separator {
+  @apply mx-2 dark:bg-gray-500;
+}
+
+.custom-select__value-container {
+  padding: 0 !important;
+}
+
+.custom-select__option--is-focused {
+  @apply bg-dark dark:bg-dark dark:border-dark;
+}
+
+.custom-select__option--is-selected {
+  @apply bg-dark dark:bg-dark dark:border-dark;
+}
+
+.custom-select__menu {
+  @apply bg-white dark:text-gray-400 dark:bg-darkTheme-bg dark:border-dark;
+}
