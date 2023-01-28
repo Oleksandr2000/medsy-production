@@ -18,7 +18,8 @@ import { Router } from "next/router";
 import MainPageLoader from "components/main-loader";
 
 export default function CustomApp({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         const start = () => {
             setLoading(true);
@@ -36,22 +37,22 @@ export default function CustomApp({ Component, pageProps }) {
         };
     }, []);
 
-  return (
-    <LocalizationProvider>
-      <AdminProvider>
-        <SearchProvider>
-          <CategoryProvider>
-            <DrawerProvider>
-              <CartProvider>
-                <FilterProvider>
-                  {loading ? <MainPageLoader /> : <Component {...pageProps} />}
-                  <Script src="https://telegram.org/js/telegram-web-app.js" />
-                </FilterProvider>
-              </CartProvider>
-            </DrawerProvider>
-          </CategoryProvider>
-        </SearchProvider>
-      </AdminProvider>
-    </LocalizationProvider>
-  );
+    return (
+        <LocalizationProvider>
+            <AdminProvider>
+                <SearchProvider>
+                    <CategoryProvider>
+                        <DrawerProvider>
+                            <CartProvider>
+                                <FilterProvider>
+                                    {loading ? <MainPageLoader /> : <Component {...pageProps} />}
+                                    <Script src="https://telegram.org/js/telegram-web-app.js" />
+                                </FilterProvider>
+                            </CartProvider>
+                        </DrawerProvider>
+                    </CategoryProvider>
+                </SearchProvider>
+            </AdminProvider>
+        </LocalizationProvider>
+    );
 }
