@@ -19,9 +19,9 @@ export async function getDataSheet(personalData: IPersonalData) {
     private_key: personalData.googleKey.replace(/\\n/gm, "\n"),
   });
   await doc.loadInfo();
-  const category_sheet = doc.sheetsByIndex[1];
-  const products_sheet = doc.sheetsByIndex[0];
-  const localization_sheet = doc.sheetsByIndex[2];
+  const category_sheet = doc.sheetsByTitle['category'];
+  const products_sheet = doc.sheetsByTitle['products'];
+  const localization_sheet = doc.sheetsByTitle['localization'];
 
   const category_rows = await category_sheet.getRows();
   const products_rows = await products_sheet.getRows();
