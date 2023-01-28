@@ -79,10 +79,35 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const categories = data.categories.filter((item) => item.lang === lang);
   const localization = data.localization.find((item) => item.lang === lang);
 
+  
+  const productsWithParentCategory = products.map(item => {
+    
+    const category_ids = [item.category_ids];
+    
+    const findParentCategory = (id) => {
+      const parent = categories.find(item => item.id == id);
+      
+      if (parent?.parent_id !== undefined){
+        category_ids.unshift(parent.parent_id);
+        
+        findParentCategory(parent.parent_id);
+      }
+      
+      return;
+    }
+    
+    findParentCategory(item.category_ids);
+    
+    return {
+      ...item,
+      category_ids
+    }
+  })
+  
   const categoriesWithFilter = categories.map((item) => {
     const categoryId = item.id;
-    const params = products
-      .filter((item) => item.category_ids == categoryId)
+    const params = productsWithParentCategory
+      .filter((item) => item.category_ids.includes(categoryId))
       .map((item) => item.params);
 
     const keys = Array.from(
@@ -125,7 +150,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      products,
+      products: productsWithParentCategory,
       categories: categoriesWithFilter,
       localization,
       personalData: { ...response.task.public, taskHash },

@@ -117,12 +117,12 @@ const TwoThumbsRange = ({ values, setValues }: ITwoThumbsRangepRrops) => {
         renderThumb={({ props }) => (
           <div
             {...props}
+            className="bg-dark dark:bg-gray-400"
             style={{
               ...props.style,
               height: "22px",
               width: "22px",
               borderRadius: "100%",
-              backgroundColor: isDark ? "#D5D5D5" : "#212121",
             }}
           />
         )}

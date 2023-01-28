@@ -15,7 +15,7 @@ export const useSearchable = (
     let _data = data;
     if (category) {
       _data = _data.filter((item) =>
-        item.category_ids.split(",")?.includes(category)
+        item.category_ids.includes(category)
       );
     }
 

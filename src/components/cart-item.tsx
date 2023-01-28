@@ -19,6 +19,8 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const { addItem, removeItem } = useCart();
   const { localization } = useLocalization();
 
+  console.log(item);
+
   return (
     <div className={CartItemBase}>
       <div className={CartItemImage}>
@@ -42,7 +44,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
         <div className="flex items-start justify-between flex-col-reverse xs:flex-row xs:items-center">
           <Counter
             value={item.quantity}
-            onIncrement={() => addItem(item)}
+            onIncrement={() => item.maxQuantity > item.quantity ? addItem(item) : () => {}}
             onDecrement={() => removeItem(item)}
           />
 

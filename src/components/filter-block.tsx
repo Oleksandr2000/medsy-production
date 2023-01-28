@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React, { useContext } from "react";
 
 import { useFilter } from "contexts/filter/filter.provider";

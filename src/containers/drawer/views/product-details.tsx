@@ -17,16 +17,11 @@ import ChevronLeft from "../../../assets/icons/chevron-left";
 import ChevronRight from "../../../assets/icons/chevron-right";
 
 export default function ProductDetails() {
-  const [visibility, setVisibility] = useState(false);
   const { addItem, getItem, removeItem } = useCart();
   const { state, dispatch } = useContext(DrawerContext);
   const { localization } = useLocalization();
 
   const count = getItem(state.item.id)?.quantity;
-
-  const toggleVisibility = () => {
-    setVisibility(!visibility);
-  };
 
   const hideDetails = () => {
     dispatch({
@@ -45,7 +40,7 @@ export default function ProductDetails() {
   };
 
   const addToCart = () => {
-    addItem(state.item);
+    addItem({...state.item, maxQuantity: state.item.quantity});
     dispatch({
       type: "TOGGLE_CART_VIEW",
       payload: {
@@ -130,16 +125,16 @@ export default function ProductDetails() {
               </span>
             </p>
             <h3 className="pt-5 text-16px font-bold text-gray-900 dark:text-gray-400">{localization.params}</h3>
-            <p className="mb-3">
+            <div className="mb-3">
               {Object.keys(state.item.params).map((item: any, index) => {
                 return (
                   <div key={index} className="my-3">
                     <div className="text-16px font-semibold text-dark dark:text-gray-600">
                       {toTitleCase(state.item.params[item].label)}
                     </div>
-                    {state.item.params[item].value.map((value) => {
+                    {state.item.params[item].value.map((value, index) => {
                       return (
-                        <div className="text-gray-500 text-14px my-1">
+                        <div key={index} className="text-gray-500 text-14px my-1">
                           <div className="inline-block bg-gray-400 mr-3 h-2 w-2 rounded-10px" />
                           {toTitleCase(value)}.
                         </div>
@@ -148,7 +143,7 @@ export default function ProductDetails() {
                   </div>
                 );
               })}
-            </p>
+            </div>
             <h3 className="pt-5 text-16px font-bold text-gray-900 dark:text-gray-400">{localization.description}</h3>
             <p className="text-gray-500 text-14px my-1">
               {state.item.description}
@@ -165,7 +160,7 @@ export default function ProductDetails() {
             className="ml-auto w-full big"
             size="big"
             onIncrement={() => {
-              addItem(state.item);
+              state.item.quantity > count ? addItem({...state.item, maxQuantity: state.item.quantity}) : () => {};
             }}
             onDecrement={() => removeItem(state.item)}
           />

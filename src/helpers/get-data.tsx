@@ -1,5 +1,6 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 import { IPersonalData } from "contexts/admin/admin.provider";
+import JSXStyle from "styled-jsx/style";
 import { parseString } from "./parse-string";
 
 export async function getDataSheet(personalData: IPersonalData) {
@@ -30,7 +31,7 @@ export async function getDataSheet(personalData: IPersonalData) {
     ({ _sheet, _rowNumber, _rawData, ...fields }) => ({
       ...fields,
     })
-  );
+  )
 
   const products = products_rows?.map(
     ({ _sheet, _rowNumber, _rawData, ...fields }) => ({
