@@ -44,7 +44,7 @@ export default function CustomApp({ Component, pageProps }) {
             <DrawerProvider>
               <CartProvider>
                 <FilterProvider>
-                {loading ? <MainPageLoader /> : <Component {...pageProps} />}
+                  {loading ? <MainPageLoader /> : <Component {...pageProps} />}
                   <Script src="https://telegram.org/js/telegram-web-app.js" />
                 </FilterProvider>
               </CartProvider>

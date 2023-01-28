@@ -17,6 +17,7 @@ export default function DrawerMenu() {
     setRangePrice,
     minPrice,
     maxPrice,
+    setAvailable
   } = useFilter();
 
   const { localization } = useLocalization();
@@ -25,6 +26,8 @@ export default function DrawerMenu() {
     setActiveFilters(null);
 
     setRangePrice([minPrice, maxPrice]);
+
+    setAvailable(false);
   };
 
   const hideMenu = () => {

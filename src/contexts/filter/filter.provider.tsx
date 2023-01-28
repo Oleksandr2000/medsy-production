@@ -10,6 +10,7 @@ export const FilterProvider = ({ children }) => {
   const [activeFilters, setActiveFilters] = useState();
   const [maxPrice, setMaxPrice] = useState<number>();
   const [minPrice, setMinPrice] = useState<number>(0);
+  const [available, setAvailable] = useState<boolean>(false);
   const [rangePrice, setRangePrice] = useState([0, 1]);
   const [sort, setSort] = useState();
 
@@ -32,6 +33,8 @@ export const FilterProvider = ({ children }) => {
         setMaxPrice,
         minPrice,
         setMinPrice,
+        available,
+        setAvailable
       }}
     >
       {children}

@@ -13,7 +13,7 @@ const Products = React.forwardRef(
     const { dispatch } = useContext(DrawerContext);
     const { searchTerm } = useSearch();
     const { category } = useCategory();
-    const { rangePrice, sort, activeFilters } = useFilter();
+    const { rangePrice, sort, activeFilters, available } = useFilter();
 
     const {localization} = useLocalization();
 
@@ -25,7 +25,8 @@ const Products = React.forwardRef(
       activeFilters,
       rangePrice,
       sort?.value?.field || "name",
-      sort?.value?.value || 1
+      sort?.value?.value || 1,
+      available
     );
 
     const { setQuantityFiltredProducts } = useFilter();

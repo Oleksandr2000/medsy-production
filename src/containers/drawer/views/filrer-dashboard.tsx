@@ -3,6 +3,7 @@ import TwoThumbsRange from "components/range-slider";
 import Checkbox from "components/checkbox";
 import { useFormik } from "formik";
 import { useFilter } from "contexts/filter/filter.provider";
+import { useLocalization } from "contexts/localization/localization.provider";
 
 const FilrerDashboard = () => {
   const {
@@ -14,7 +15,11 @@ const FilrerDashboard = () => {
     data,
     minPrice,
     maxPrice,
+    available,
+    setAvailable
   } = useFilter();
+
+  const {localization} = useLocalization();
 
   let initialValues = {};
 
@@ -52,12 +57,16 @@ const FilrerDashboard = () => {
       quantity = quantity + 1;
     }
 
+    if (available) {
+      quantity = quantity + 1;
+    }
+
     setApplyFiltersQuantity(quantity);
   };
 
   useEffect(() => {
     handleApplyFiltersQuantity();
-  }, [rangePrice[0], rangePrice[1], FilterForm.values]);
+  }, [rangePrice[0], rangePrice[1], FilterForm.values, available]);
 
   useEffect(() => {
     setActiveFilters(null);
@@ -73,9 +82,20 @@ const FilrerDashboard = () => {
     <div className="px-10">
       <TwoThumbsRange values={rangePrice} setValues={setRangePrice} />
       <form onSubmit={FilterForm.handleSubmit} className="w-full">
-        {data && (
-          <div className="flex flex-col items-start">
-            {Object.keys(data).map((key: string) => (
+        <div className="flex flex-col items-start">
+        <div className="flex w-full flex-col">
+                <div className="mb-3">
+                  <h3 className="dark:text-gray-500">{localization.available}</h3>
+                </div>
+                  <Checkbox
+                    type="checkbox"
+                    name="available"
+                    values={available}
+                    label={localization.available}
+                    onChange={() => setAvailable(!available)}
+                  />
+              </div>
+            {data && Object.keys(data).map((key: string) => (
               <div key={key} className="flex w-full flex-col">
                 <div className="mb-3">
                   <h3 className="dark:text-gray-500">{data[key]["label"]}</h3>
@@ -94,7 +114,6 @@ const FilrerDashboard = () => {
               </div>
             ))}
           </div>
-        )}
       </form>
     </div>
   );

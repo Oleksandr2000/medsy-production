@@ -12,7 +12,7 @@ export interface ICheckboxProps
 const Checkbox = ({ values, label, ...props }: ICheckboxProps) => (
   <label className="mr-4 mb-2 flex items-center">
     <input {...props} type="checkbox" className="absolute h-8 w-8 opacity-0" />
-    <div className="mr-2 flex  h-8 w-8 flex-shrink-0 items-center justify-center rounded border-2 border-dark bg-white focus-within:border-dark dark:bg-gray-300">
+    <div className="mr-2 flex  h-8 w-8 flex-shrink-0 items-center justify-center rounded border-2 border-dark bg-white focus-within:border-dark dark:bg-slate-500">
       {Array.isArray(values) && values?.includes(props.value) && (
         <svg
           className="pointer-events-none block h-3 w-3 fill-current text-dark"

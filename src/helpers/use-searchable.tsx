@@ -8,7 +8,8 @@ export const useSearchable = (
   filters?,
   price?,
   field = "name",
-  orderBy?
+  orderBy?,
+  available?,
 ) => {
   return useMemo(() => {
     const regex = new RegExp(searchText, "i");
@@ -17,6 +18,10 @@ export const useSearchable = (
       _data = _data.filter((item) =>
         item.category_ids.includes(category)
       );
+    }
+
+    if(available){
+      _data = _data.filter(item => item.quantity >= 1);
     }
 
     if (filters) {

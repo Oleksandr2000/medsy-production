@@ -19,8 +19,6 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const { addItem, removeItem } = useCart();
   const { localization } = useLocalization();
 
-  console.log(item);
-
   return (
     <div className={CartItemBase}>
       <div className={CartItemImage}>
