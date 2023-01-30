@@ -125,7 +125,7 @@ export default function ProductDetails() {
                                             return (
                                                 <div key={index} className="my-1 text-14px text-gray-500">
                                                     <div className="mr-3 inline-block h-2 w-2 rounded-10px bg-gray-400" />
-                                                    {toTitleCase(value)}.
+                                                    {toTitleCase(value)}
                                                 </div>
                                             );
                                         })}
