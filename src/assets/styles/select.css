@@ -1,6 +1,5 @@
 .custom-select__control {
-  min-width: 170px !important;
-  @apply border rounded-md border-gray-400 px-2 dark:hover:border-dark bg-white dark:bg-dark dark:border-dark;
+  @apply w-[150px] xs:w-[170px] md:w-[200px] border rounded-md border-gray-400 px-2 dark:hover:border-dark bg-white dark:bg-dark dark:border-dark;
 }
 
 .custom-select__single-value {

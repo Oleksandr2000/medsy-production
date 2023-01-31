@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from "react";
+import React, { ReactElement, useRef, useState } from "react";
 import Image from "next/image";
 import { useCategory } from "contexts/category/use-category";
 
@@ -11,8 +11,8 @@ interface Props {
 
 export default function CategoryCard({ imageUrl, name, id, parentId }: Props): ReactElement {
     const { setCategory } = useCategory();
-    const [sideLength, setSideLength] = React.useState(90);
-    const ref = React.useRef(null);
+    const [sideLength, setSideLength] = useState(90);
+    const ref = useRef(null);
 
     function handleCategoryClick() {
         setCategory({ id: id, parentId: parentId, name: name });

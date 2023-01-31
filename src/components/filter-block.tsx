@@ -37,7 +37,7 @@ const Filters = () => {
     return (
         <div className="mt-8 flex flex-row items-center justify-between">
             <button
-                className="flex h-10 w-[160px] flex-row items-center justify-between rounded-md border border-gray-400 bg-white px-4 dark:border-dark dark:bg-dark"
+                className="flex h-10 w-[140px] flex-row items-center justify-between rounded-md border border-gray-400 bg-white px-2 dark:border-dark dark:bg-dark xs:w-[160px] xs:px-4"
                 onClick={showMenu}
             >
                 <svg className="hidden">
