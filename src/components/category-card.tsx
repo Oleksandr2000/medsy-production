@@ -11,14 +11,24 @@ interface Props {
 
 export default function CategoryCard({ imageUrl, name, id, parentId }: Props): ReactElement {
     const { setCategory } = useCategory();
+    const [sideLength, setSideLength] = React.useState(90);
+    const ref = React.useRef(null);
 
     function handleCategoryClick() {
         setCategory({ id: id, parentId: parentId, name: name });
     }
 
-    const ref = useRef(null);
+    const resizeHandler = () => {
+        setSideLength(ref.current.clientWidth);
+    };
 
-    const sideLength = typeof ref.current?.clientWidth !== "undefined" ? ref.current?.clientWidth : 90;
+    React.useEffect(() => {
+        window.addEventListener("resize", resizeHandler);
+        resizeHandler();
+        return () => {
+            window.removeEventListener("resize", resizeHandler);
+        };
+    }, []);
 
     return (
         <div ref={ref} className="mx-auto flex flex-col text-center" onClick={handleCategoryClick} role="button">
