@@ -11,31 +11,41 @@ interface Props {
 
 export default function CategoryCard({ imageUrl, name, id, parentId }: Props): ReactElement {
     const { setCategory } = useCategory();
+    const [size, setSize] = React.useState({ clientHeight: 90, clientWidth: 90 });
 
     function handleCategoryClick() {
         setCategory({ id: id, parentId: parentId, name: name });
     }
+    const ref = React.useRef();
 
-    let img;
+    const resizeHandler = () => {
+        const { clientHeight, clientWidth } = ref.current || { clientHeight: 90, clientWidth: 90 };
+        setSize({ clientHeight, clientWidth });
+    };
 
-    if (typeof document !== "undefined" && typeof window !== "undefined") {
-        img = document.getElementById("category-img");
-    }
+    React.useEffect(() => {
+        window.addEventListener("resize", resizeHandler);
+        return () => {
+            window.removeEventListener("resize", resizeHandler);
+        };
+    }, []);
 
-    const innerHeight = img?.width ? img.width : 90;
+    const sideLength = size.clientWidth;
 
     return (
-        <div className="flex flex-col text-center" onClick={handleCategoryClick} role="button">
+        <div ref={ref} className="mx-auto flex flex-col text-center" onClick={handleCategoryClick} role="button">
             <Image
                 id="category-img"
                 src={imageUrl ?? "/"}
                 alt={name}
-                width={90}
-                height={innerHeight}
-                layout="intrinsic"
+                width={sideLength}
+                height={sideLength}
+                layout="fixed"
                 className="rounded-lg"
             />
-            <p className="truncate font-semibold text-gray-900 dark:text-gray-400">{name}</p>
+            <span className="overflow-hidden">
+                <span className="m-0 px-0 pt-2 font-semibold text-gray-900 dark:text-gray-400">{name}</span>
+            </span>
         </div>
     );
 }

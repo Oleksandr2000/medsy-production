@@ -17,9 +17,10 @@ interface Props {
 }
 SwiperCore.use([Navigation]);
 const breakpoints = {
-    415: {
-        spaceBetween: 22,
+    425: {
+        slidesPerView: 4,
     },
+
     600: {
         slidesPerView: 5,
     },
@@ -27,16 +28,16 @@ const breakpoints = {
         slidesPerView: 6,
     },
     1024: {
-        slidesPerView: 8,
+        slidesPerView: 7,
     },
     1200: {
-        slidesPerView: 9,
+        slidesPerView: 8,
     },
     1400: {
-        slidesPerView: 12,
+        slidesPerView: 9,
     },
     1900: {
-        slidesPerView: 16,
+        slidesPerView: 12,
     },
 };
 const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLDivElement>) => {
@@ -62,7 +63,7 @@ const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLD
                 {currentCategories?.length > 0 && (
                     <Swiper
                         slidesPerView={3}
-                        spaceBetween={14}
+                        spaceBetween={16}
                         navigation={{
                             prevEl: ".swiper-previous-button",
                             nextEl: ".swiper-next-button",
