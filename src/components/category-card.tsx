@@ -7,37 +7,24 @@ interface Props {
     name: string;
     id: string;
     parentId: string;
+    imgSize: number;
 }
 
-export default function CategoryCard({ imageUrl, name, id, parentId }: Props): ReactElement {
+export default function CategoryCard({ imageUrl, name, id, parentId, imgSize }: Props): ReactElement {
     const { setCategory } = useCategory();
-    const [sideLength, setSideLength] = useState(90);
-    const ref = useRef(null);
 
     function handleCategoryClick() {
         setCategory({ id: id, parentId: parentId, name: name });
     }
 
-    const resizeHandler = () => {
-        setSideLength(ref.current.clientWidth);
-    };
-
-    React.useEffect(() => {
-        window.addEventListener("resize", resizeHandler);
-        resizeHandler();
-        return () => {
-            window.removeEventListener("resize", resizeHandler);
-        };
-    }, []);
-
     return (
-        <div ref={ref} className="mx-auto flex flex-col text-center" onClick={handleCategoryClick} role="button">
+        <div className="mx-auto flex flex-col text-center" onClick={handleCategoryClick} role="button">
             <Image
                 id="category-img"
                 src={imageUrl ?? "/"}
                 alt={name}
-                width={sideLength}
-                height={sideLength}
+                width={imgSize}
+                height={imgSize}
                 layout="fixed"
                 className="rounded-lg"
             />

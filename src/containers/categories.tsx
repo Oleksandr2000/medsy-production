@@ -1,11 +1,11 @@
 import CategoryCard from "components/category-card";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 
 import "swiper/css/bundle";
 
-import { ArrowButtonBase, ButtonGroupBase } from "components/utils/theme";
+import { ArrowButtonBase } from "components/utils/theme";
 import ChevronLeft from "assets/icons/chevron-left";
 import ChevronRight from "assets/icons/chevron-right";
 import { useCategory } from "contexts/category/use-category";
@@ -43,6 +43,20 @@ const breakpoints = {
 const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLDivElement>) => {
     const { category } = useCategory();
     const { setData } = useFilter();
+    const [sideLength, setSideLength] = useState(90);
+    const refSlide = useRef(null);
+
+    const resizeHandler = () => {
+        setSideLength(refSlide.current.clientWidth);
+    };
+
+    React.useEffect(() => {
+        window.addEventListener("resize", resizeHandler);
+        resizeHandler();
+        return () => {
+            window.removeEventListener("resize", resizeHandler);
+        };
+    }, []);
 
     const currentFilters = category.id !== "" ? data.filter((item) => item.id === category.id)[0].filters : undefined;
 
@@ -72,15 +86,21 @@ const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLD
                     >
                         {currentCategories?.map((current) => (
                             <SwiperSlide key={current.id}>
-                                <CategoryCard
-                                    id={current.id}
-                                    parentId={current.parent_id}
-                                    imageUrl={current.image_icon_url}
-                                    name={current.name}
-                                />
+                                <div ref={refSlide}>
+                                    <CategoryCard
+                                        id={current.id}
+                                        parentId={current.parent_id}
+                                        imageUrl={current.image_icon_url}
+                                        name={current.name}
+                                        imgSize={sideLength}
+                                    />
+                                </div>
                             </SwiperSlide>
                         ))}
-                        <div className={ButtonGroupBase + " " + "z-10"}>
+                        <div
+                            style={{ top: sideLength / 2 + "px" }}
+                            className={`absolute z-10 flex w-full translate-y-1/2 items-center`}
+                        >
                             <button
                                 aria-label="prev-button"
                                 className={ArrowButtonBase + " " + "left-0 ml-[5px]" + " " + "swiper-previous-button"}
