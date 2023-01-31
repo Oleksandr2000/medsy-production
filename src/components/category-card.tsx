@@ -35,7 +35,7 @@ export default function CategoryCard({ imageUrl, name, id, parentId }: Props): R
                 layout="intrinsic"
                 className="rounded-lg"
             />
-            <p className="break-words font-semibold text-gray-900 dark:text-gray-400">{name}</p>
+            <p className="truncate font-semibold text-gray-900 dark:text-gray-400">{name}</p>
         </div>
     );
 }
