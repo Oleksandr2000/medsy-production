@@ -5,7 +5,7 @@ import SwiperCore, { Navigation } from "swiper";
 
 import "swiper/css/bundle";
 
-import { ArrowButtonBase, ButtonGroupBase, NextButtonRadius, PrevButtonRadius } from "components/utils/theme";
+import { ArrowButtonBase, ButtonGroupBase } from "components/utils/theme";
 import ChevronLeft from "assets/icons/chevron-left";
 import ChevronRight from "assets/icons/chevron-right";
 import { useCategory } from "contexts/category/use-category";
@@ -17,23 +17,26 @@ interface Props {
 }
 SwiperCore.use([Navigation]);
 const breakpoints = {
+    415: {
+        spaceBetween: 22,
+    },
     600: {
-        slidesPerView: 3,
-    },
-    768: {
-        slidesPerView: 4,
-    },
-    1024: {
         slidesPerView: 5,
     },
-    1200: {
+    768: {
         slidesPerView: 6,
     },
-    1400: {
+    1024: {
         slidesPerView: 8,
     },
+    1200: {
+        slidesPerView: 9,
+    },
+    1400: {
+        slidesPerView: 12,
+    },
     1900: {
-        slidesPerView: 10,
+        slidesPerView: 16,
     },
 };
 const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLDivElement>) => {
@@ -58,8 +61,8 @@ const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLD
                 <h2 className="mb-3 dark:text-gray-400">{category.name}</h2>
                 {currentCategories?.length > 0 && (
                     <Swiper
-                        slidesPerView={2}
-                        spaceBetween={10}
+                        slidesPerView={3}
+                        spaceBetween={14}
                         navigation={{
                             prevEl: ".swiper-previous-button",
                             nextEl: ".swiper-next-button",
@@ -79,13 +82,13 @@ const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLD
                         <div className={ButtonGroupBase + " " + "z-10"}>
                             <button
                                 aria-label="prev-button"
-                                className={ArrowButtonBase + " " + PrevButtonRadius + " " + "swiper-previous-button"}
+                                className={ArrowButtonBase + " " + "left-0 ml-[5px]" + " " + "swiper-previous-button"}
                             >
                                 <ChevronLeft height="12px" />
                             </button>
                             <button
                                 aria-label="next-button"
-                                className={ArrowButtonBase + " " + NextButtonRadius + " " + "swiper-next-button"}
+                                className={ArrowButtonBase + " " + "right-0 mr-[5px]" + " " + "swiper-next-button"}
                             >
                                 <ChevronRight height="12px" />
                             </button>
