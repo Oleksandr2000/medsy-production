@@ -14,6 +14,7 @@ import Breadcrumbs from "components/breadcrumbs";
 import { useFilter } from "contexts/filter/filter.provider";
 interface Props {
     data: any;
+    perCategorySlide: number;
 }
 SwiperCore.use([Navigation]);
 const breakpoints = {
@@ -40,7 +41,7 @@ const breakpoints = {
         slidesPerView: 12,
     },
 };
-const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLDivElement>) => {
+const Categories = React.forwardRef(({ data, perCategorySlide }: Props, ref: React.RefObject<HTMLDivElement>) => {
     const { category } = useCategory();
     const { setData } = useFilter();
     const [sideLength, setSideLength] = useState(90);
@@ -76,7 +77,7 @@ const Categories = React.forwardRef(({ data }: Props, ref: React.RefObject<HTMLD
                 <h2 className="mb-3 dark:text-gray-400">{category.name}</h2>
                 {currentCategories?.length > 0 && (
                     <Swiper
-                        slidesPerView={3}
+                        slidesPerView={perCategorySlide}
                         spaceBetween={16}
                         navigation={{
                             prevEl: ".swiper-previous-button",

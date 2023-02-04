@@ -12,7 +12,7 @@ import { useAdmin } from "contexts/admin/admin.provider";
 import { useFilter } from "contexts/filter/filter.provider";
 import { useLocalization } from "contexts/localization/localization.provider";
 
-export default function Home({ products, categories, localization, personalData, maxPrice, theme }) {
+export default function Home({ products, categories, localization, personalData, maxPrice, theme, perCategorySlide }) {
     const { elRef, scroll } = useRefScroll({
         percentOfElement: 0,
         percentOfContainer: 0,
@@ -49,7 +49,7 @@ export default function Home({ products, categories, localization, personalData,
                 <title>Store</title>
             </Head>
             <Layout>
-                <Categories data={categories} />
+                <Categories data={categories} perCategorySlide={perCategorySlide} />
                 <Products items={products} ref={elRef} />
             </Layout>
         </>
@@ -135,6 +135,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             categories: categoriesWithFilter,
             localization,
             personalData: { ...response.task.public, taskHash },
+            perCategorySlide: response.task.public.perCategorySlide || 4,
             maxPrice,
             theme,
         },
