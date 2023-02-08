@@ -2,6 +2,7 @@ import { useFilter } from "contexts/filter/filter.provider";
 import { useDarkTheme } from "helpers/use-darkTheme";
 import React from "react";
 import { getTrackBackground, Range } from "react-range";
+import { useLocalization } from "../contexts/localization/localization.provider";
 
 export interface ITwoThumbsRangepRrops {
     values: number[];
@@ -10,6 +11,7 @@ export interface ITwoThumbsRangepRrops {
 
 const TwoThumbsRange = ({ values, setValues }: ITwoThumbsRangepRrops) => {
     const { maxPrice, minPrice } = useFilter();
+    const { localization } = useLocalization();
 
     const MIN = minPrice;
     const MAX = maxPrice;
@@ -37,6 +39,9 @@ const TwoThumbsRange = ({ values, setValues }: ITwoThumbsRangepRrops) => {
 
     return (
         <div className="my-5">
+            <h4 className="pb-5 text-18px font-semibold text-dark dark:text-gray-500">
+                {localization.filterPriceName}
+            </h4>
             <div className="mb-5 flex flex-row items-center justify-between text-16px font-normal text-gray-500">
                 <input
                     type="number"

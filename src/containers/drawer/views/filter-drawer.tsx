@@ -86,11 +86,11 @@ export default function DrawerMenu() {
                 <Scrollbar className="menu-scrollbar flex-grow">
                     <div className="flex flex-col py-5 px-10">
                         {category.name !== "" ? (
-                            <h4 className="pb-4 text-16px font-normal text-dark dark:text-gray-400">
+                            <h4 className="pb-4 text-18px font-normal text-dark dark:text-gray-400">
                                 {localization.category}: <span className="font-semibold">{category.name}</span>
                             </h4>
                         ) : (
-                            <h4 className="pb-4 text-16px font-normal text-dark dark:text-gray-400">
+                            <h4 className="pb-4 text-18px font-semibold text-dark dark:text-gray-400">
                                 {localization.chooseCategory}
                             </h4>
                         )}
