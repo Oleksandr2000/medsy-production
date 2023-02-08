@@ -4,6 +4,7 @@ import Search from "components/search";
 import { DrawerContext } from "contexts/drawer/drawer.provider";
 import { useCart } from "contexts/cart/cart.provider";
 import { useCategory } from "contexts/category/use-category";
+import { animatedScrollTo } from "react-select/dist/declarations/src/utils";
 
 export default function Header() {
     const { dispatch }: any = useContext(DrawerContext);
@@ -25,9 +26,19 @@ export default function Header() {
         });
     };
 
+    const onClickHome = () => {
+        setCategory({ id: "", parentId: "", name: "" });
+        if (typeof window !== "undefined" && window !== null) {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        }
+    };
+
     return (
         <header className="body-font fixed z-20 flex h-90px w-full items-center bg-white px-20px text-gray-700 shadow-mobile dark:bg-darkTheme-bg dark:shadow-header dark:shadow-slate-700 md:px-30px lg:px-40px lg:shadow-header">
-            <button onClick={() => setCategory({ id: "", parentId: "", name: "" })} className="cursor-pointer">
+            <button onClick={onClickHome} className="cursor-pointer">
                 <svg width={30} height={30} className="hidden">
                     <symbol viewBox="0 0 50 50" id="home">
                         <g id="Layer_1" className="dark:fill-slate-400">

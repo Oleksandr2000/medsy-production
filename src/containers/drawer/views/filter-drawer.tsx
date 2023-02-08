@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import ArrowLeft from "assets/icons/arrow-left";
 
@@ -7,6 +7,9 @@ import { DrawerContext } from "contexts/drawer/drawer.provider";
 import { useFilter } from "contexts/filter/filter.provider";
 import FilrerDashboard from "containers/drawer/views/filrer-dashboard";
 import { useLocalization } from "contexts/localization/localization.provider";
+import { useCategory } from "../../../contexts/category/use-category";
+import RightChevron from "../../../components/right-chevron";
+import Breadcrumbs from "../../../components/breadcrumbs";
 
 export default function DrawerMenu() {
     const { dispatch } = useContext(DrawerContext);
@@ -18,9 +21,26 @@ export default function DrawerMenu() {
         minPrice,
         maxPrice,
         setAvailable,
+        setData,
     } = useFilter();
-
+    const { category, categories, setCategory } = useCategory();
     const { localization } = useLocalization();
+    console.log(category);
+    function handleCategoryClick(id, parentId, name) {
+        setCategory({ id: id, parentId: parentId, name: name });
+    }
+
+    const currentFilters =
+        category.id !== "" ? categories.filter((item) => item.id === category.id)[0].filters : undefined;
+
+    const currentCategories =
+        category.id !== ""
+            ? categories.filter((item) => item.parent_id === category.id)
+            : categories.filter((item) => item.parent_id === "");
+
+    useEffect(() => {
+        setData(currentFilters);
+    }, [category.id]);
 
     const clearAll = () => {
         setActiveFilters(null);
@@ -64,7 +84,31 @@ export default function DrawerMenu() {
                 </div>
 
                 <Scrollbar className="menu-scrollbar flex-grow">
-                    <div className="flex flex-col py-5">
+                    <div className="flex flex-col py-5 px-10">
+                        {category.name !== "" ? (
+                            <h4 className="pb-4 text-16px font-normal text-dark dark:text-gray-400">
+                                {localization.category}: <span className="font-semibold">{category.name}</span>
+                            </h4>
+                        ) : (
+                            <h4 className="pb-4 text-16px font-normal text-dark dark:text-gray-400">
+                                {localization.chooseCategory}
+                            </h4>
+                        )}
+                        <Breadcrumbs categories={categories} />
+                        <div>
+                            {currentCategories?.map((cat) => (
+                                <div
+                                    key={cat.id}
+                                    className="flex items-center justify-between py-2 first:mt-2"
+                                    onClick={() => handleCategoryClick(cat.id, cat.parent_id, cat.name)}
+                                >
+                                    <p className="block cursor-pointer text-16px font-medium text-gray-600 dark:text-gray-500">
+                                        {cat.name}
+                                    </p>
+                                    <RightChevron />
+                                </div>
+                            ))}
+                        </div>
                         <FilrerDashboard />
                     </div>
                 </Scrollbar>

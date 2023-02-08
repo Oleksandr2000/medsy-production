@@ -79,7 +79,7 @@ const FilrerDashboard = () => {
     }, [activeFilters]);
 
     return (
-        <div className="px-10">
+        <div>
             <TwoThumbsRange values={rangePrice} setValues={setRangePrice} />
             <form onSubmit={FilterForm.handleSubmit} className="w-full">
                 <div className="flex flex-col items-start">

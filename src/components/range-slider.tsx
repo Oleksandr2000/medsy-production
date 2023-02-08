@@ -44,7 +44,7 @@ const TwoThumbsRange = ({ values, setValues }: ITwoThumbsRangepRrops) => {
                     value={values[0]}
                     min={MIN}
                     max={MAX}
-                    className="'text-gray-900 dark:placeholder:gray-400 h-12 w-2/5 rounded border border-transparent bg-gray-f7 px-4 placeholder-gray-500 outline-none transition duration-200 hover:border-gray-400 focus:border-black focus:placeholder-gray-900 dark:bg-slate-600 dark:text-gray-400 dark:focus:placeholder-gray-500"
+                    className="dark:placeholder:gray-400 h-12 w-[45%] rounded border border-transparent bg-gray-300 px-4 text-gray-900 placeholder-gray-500 outline-none transition duration-200 hover:border-gray-400 focus:border-black focus:placeholder-gray-900 dark:bg-slate-600 dark:text-gray-400 dark:focus:placeholder-gray-500"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setValues([validationInputMin(Number(e.target.value), 0, values[1]), values[1]]);
                     }}
@@ -55,7 +55,7 @@ const TwoThumbsRange = ({ values, setValues }: ITwoThumbsRangepRrops) => {
                     value={values[1]}
                     min={MIN}
                     max={MAX}
-                    className="'text-gray-900 dark:placeholder:gray-400 h-12 w-2/5 rounded border border-transparent bg-gray-f7 px-4 placeholder-gray-500 outline-none transition duration-200 hover:border-gray-400 focus:border-black focus:placeholder-gray-900 dark:bg-slate-600 dark:text-gray-400 dark:focus:placeholder-gray-500"
+                    className="dark:placeholder:gray-400 h-12 w-[45%] rounded border border-transparent bg-gray-300 px-4 text-gray-900 placeholder-gray-500 outline-none transition duration-200 hover:border-gray-400 focus:border-black focus:placeholder-gray-900 dark:bg-slate-600 dark:text-gray-400 dark:focus:placeholder-gray-500"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setValues([
                             values[0],

@@ -11,6 +11,7 @@ import { GetServerSideProps } from "next";
 import { useAdmin } from "contexts/admin/admin.provider";
 import { useFilter } from "contexts/filter/filter.provider";
 import { useLocalization } from "contexts/localization/localization.provider";
+import { useCategory } from "../contexts/category/use-category";
 
 export default function Home({ products, categories, localization, personalData, maxPrice, theme, perCategorySlide }) {
     const { elRef, scroll } = useRefScroll({
@@ -22,6 +23,7 @@ export default function Home({ products, categories, localization, personalData,
     const { setPersonalData } = useAdmin();
     const { setLocalization } = useLocalization();
     const { setMaxPrice, setRangePrice, minPrice } = useFilter();
+    const { setCategories } = useCategory();
 
     if (typeof window !== "undefined") {
         document.documentElement.classList.add(theme);
@@ -29,6 +31,7 @@ export default function Home({ products, categories, localization, personalData,
 
     useEffect(() => {
         setPersonalData(personalData);
+        setCategories(categories);
 
         setLocalization(localization);
 
@@ -49,7 +52,9 @@ export default function Home({ products, categories, localization, personalData,
                 <title>Store</title>
             </Head>
             <Layout>
-                <Categories data={categories} perCategorySlide={perCategorySlide} />
+                <div className="mt-5">
+                    <Categories data={categories} perCategorySlide={perCategorySlide} />
+                </div>
                 <Products items={products} ref={elRef} />
             </Layout>
         </>

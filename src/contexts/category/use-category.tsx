@@ -6,6 +6,7 @@ export const CategoryProvider = ({ children }) => {
     const [category, setCategory] = useState({ id: "", parentId: "", name: "" });
     const [parentCategoryId, setParentCategoryId] = useState("");
     const [parentCategoryName, setParentCategoryName] = useState("");
+    const [categories, setCategories] = useState([]);
 
     return (
         <categoryContext.Provider
@@ -16,6 +17,8 @@ export const CategoryProvider = ({ children }) => {
                 setParentCategoryId,
                 parentCategoryName,
                 setParentCategoryName,
+                categories,
+                setCategories,
             }}
         >
             {children}

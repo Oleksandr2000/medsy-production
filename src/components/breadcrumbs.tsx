@@ -1,8 +1,7 @@
 import { useCategory } from "contexts/category/use-category";
 import { useLocalization } from "contexts/localization/localization.provider";
-import Image from "next/image";
 import React from "react";
-import LeftChevron from "../../public/icons/left-chevron.svg";
+import LeftChevron from "./left-chevron";
 
 const Breadcrumbs = ({ categories }) => {
     const { setCategory, category } = useCategory();
@@ -16,7 +15,7 @@ const Breadcrumbs = ({ categories }) => {
     if (category.parentId === "") {
         return (
             <div
-                className="mt-5 flex cursor-pointer flex-row items-center text-16px dark:text-gray-400"
+                className="flex cursor-pointer flex-row items-center text-16px text-dark dark:text-gray-400"
                 onClick={() =>
                     setCategory({
                         id: "",
@@ -25,7 +24,7 @@ const Breadcrumbs = ({ categories }) => {
                     })
                 }
             >
-                <Image src={LeftChevron} width={22} height={24} />
+                <LeftChevron />
                 <div>{localization.home}</div>
             </div>
         );
@@ -34,7 +33,7 @@ const Breadcrumbs = ({ categories }) => {
 
     return (
         <div
-            className="mt-5 flex cursor-pointer flex-row items-center text-16px dark:text-gray-400"
+            className="flex cursor-pointer flex-row items-center text-16px text-dark dark:text-gray-400"
             onClick={() =>
                 setCategory({
                     id: parrentCategory.id,
@@ -43,7 +42,7 @@ const Breadcrumbs = ({ categories }) => {
                 })
             }
         >
-            <Image src={LeftChevron} width={22} height={24} />
+            <LeftChevron />
             <div>{parrentCategory.name}</div>
         </div>
     );
