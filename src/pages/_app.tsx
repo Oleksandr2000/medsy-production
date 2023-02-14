@@ -1,5 +1,4 @@
 import "rc-collapse/assets/index.css";
-import "overlayscrollbars/css/OverlayScrollbars.css";
 import "assets/styles/scrollbar.css";
 import "assets/styles/rc-collapse.css";
 import "assets/styles/index.css";

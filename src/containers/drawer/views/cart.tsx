@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { Scrollbar } from "components/scrollbar";
 import { useCart } from "contexts/cart/cart.provider";
 import { DrawerContext } from "contexts/drawer/drawer.provider";
 import CartItem from "components/cart-item";
@@ -111,11 +110,11 @@ export default function Cart() {
                         <h2 className="m-0 text-24px font-bold dark:text-gray-300">{localization.basketTitle}</h2>
                     </div>
 
-                    <Scrollbar className="cart-scrollbar flex-grow">
+                    <div className="flex-grow overflow-auto">
                         {items.map((item) => (
                             <CartItem item={item} key={item.id} />
                         ))}
-                    </Scrollbar>
+                    </div>
                 </>
             ) : (
                 <NoItem />

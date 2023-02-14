@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Scrollbar } from "components/scrollbar";
 import Button from "components/button";
 import { useCart } from "contexts/cart/cart.provider";
 import { DrawerContext } from "contexts/drawer/drawer.provider";
@@ -62,7 +61,7 @@ export default function ProductDetails() {
                 <CartCrumb />
             </div>
 
-            <Scrollbar className="details-scrollbar flex-grow">
+            <div className="flex-grow overflow-auto">
                 <div className="flex flex-col p-30px pt-0">
                     <div className="relative mb-30px flex h-360px w-full items-center justify-center overflow-hidden rounded">
                         <Swiper
@@ -139,7 +138,7 @@ export default function ProductDetails() {
                         <p className="my-1 text-14px text-gray-500">{state.item.description}</p>
                     </div>
                 </div>
-            </Scrollbar>
+            </div>
 
             <div className="flex flex-col p-30px">
                 {count > 0 ? (

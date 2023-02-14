@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 
 import ArrowLeft from "assets/icons/arrow-left";
 
-import { Scrollbar } from "components/scrollbar";
 import { DrawerContext } from "contexts/drawer/drawer.provider";
 import { useFilter } from "contexts/filter/filter.provider";
 import FilrerDashboard from "containers/drawer/views/filrer-dashboard";
@@ -83,7 +82,7 @@ export default function DrawerMenu() {
                     </button>
                 </div>
 
-                <Scrollbar className="menu-scrollbar flex-grow">
+                <div className="flex-grow overflow-auto">
                     <div className="flex flex-col py-5 px-10">
                         {category.name !== "" ? (
                             <h4 className="pb-4 text-18px font-normal text-dark dark:text-gray-400">
@@ -111,7 +110,7 @@ export default function DrawerMenu() {
                         </div>
                         <FilrerDashboard />
                     </div>
-                </Scrollbar>
+                </div>
 
                 <button className="w-full bg-green py-1 font-bold hover:bg-green hover:opacity-90" onClick={hideMenu}>
                     <span className="text-16px font-medium text-gray-300">{localization.filterShow}</span>
